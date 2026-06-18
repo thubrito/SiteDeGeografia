@@ -112,13 +112,13 @@ nav {
   top: 58px;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: var(--verde);
-  z-index: 199;
+  background-color: #1B3A2D !important;
+  z-index: 9999;
   flex-direction: column;
   padding: 0.5rem 0 1rem;
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
   border-top: 1px solid rgba(245,237,214,0.1);
+  isolation: isolate;
 }
 .nav-drawer.open {
   display: flex;
@@ -149,6 +149,8 @@ nav {
   position: relative;
   overflow: hidden;
   padding: 5rem 2rem 4rem;
+  isolation: auto;
+  z-index: 0;
 }
 .hero-bg-pattern {
   position: absolute;
