@@ -6,591 +6,752 @@
 <title>Geodinâmica Digital – África & Américas</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --verde: #1B3A2D;
-    --verde-medio: #2C5F4A;
-    --verde-claro: #3D7A5F;
-    --ocre: #C8843A;
-    --ocre-claro: #E8A55A;
-    --areia: #F5EDD6;
-    --areia-escura: #E8DFC4;
-    --cafe: #3D1C02;
-    --branco: #FDFAF4;
-    --cinza-text: #4A4A3A;
-  }
+:root {
+  --verde: #1B3A2D;
+  --verde-medio: #2C5F4A;
+  --verde-claro: #3D7A5F;
+  --ocre: #C8843A;
+  --ocre-claro: #E8A55A;
+  --areia: #F5EDD6;
+  --areia-escura: #E8DFC4;
+  --cafe: #3D1C02;
+  --branco: #FDFAF4;
+  --cinza-text: #4A4A3A;
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--branco);
-    color: var(--cafe);
-    font-size: 16px;
-    line-height: 1.7;
-  }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--branco);
+  color: var(--cafe);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
 
-  /* NAV */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--verde);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 58px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--areia);
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-  }
-  .nav-links {
-    display: flex;
-    gap: 0;
-    list-style: none;
-  }
-  .nav-links a {
-    display: block;
-    padding: 0 1rem;
-    height: 58px;
-    line-height: 58px;
-    color: rgba(245,237,214,0.75);
-    text-decoration: none;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    transition: color 0.2s, background 0.2s;
-  }
-  .nav-links a:hover {
-    color: var(--areia);
-    background: rgba(255,255,255,0.07);
-  }
+/* ===== NAV ===== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--verde);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--areia);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+}
+.nav-links a {
+  display: block;
+  padding: 0 0.9rem;
+  height: 58px;
+  line-height: 58px;
+  color: rgba(245,237,214,0.75);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover {
+  color: var(--areia);
+  background: rgba(255,255,255,0.07);
+}
 
-  /* HERO */
-  #inicio {
-    background: var(--verde);
-    min-height: 92vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding: 5rem 2rem 4rem;
-  }
-  .hero-bg-pattern {
-    position: absolute;
-    inset: 0;
-    opacity: 0.07;
-    background-image: radial-gradient(circle, var(--areia) 1px, transparent 1px);
-    background-size: 32px 32px;
-  }
-  .hero-accent-line {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: var(--ocre);
-  }
+/* Hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--areia);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile menu drawer */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: 58px;
+  left: 0;
+  right: 0;
+  background: var(--verde);
+  z-index: 199;
+  flex-direction: column;
+  padding: 0.5rem 0 1rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  border-top: 1px solid rgba(245,237,214,0.1);
+}
+.nav-drawer.open { display: flex; }
+.nav-drawer a {
+  display: block;
+  padding: 0.85rem 2rem;
+  color: rgba(245,237,214,0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(245,237,214,0.07);
+  transition: background 0.2s, color 0.2s;
+}
+.nav-drawer a:last-child { border-bottom: none; }
+.nav-drawer a:hover { background: rgba(255,255,255,0.07); color: var(--areia); }
+
+/* ===== HERO ===== */
+#inicio {
+  background: var(--verde);
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 2rem 4rem;
+}
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  background-image: radial-gradient(circle, var(--areia) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.hero-accent-line {
+  position: absolute;
+  right: 0; top: 0;
+  width: 3px; height: 100%;
+  background: var(--ocre);
+}
+.hero-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+.hero-text { position: relative; z-index: 2; }
+.hero-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ocre-claro);
+  margin-bottom: 1.2rem;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 4vw, 3.2rem);
+  font-weight: 900;
+  color: var(--areia);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+.hero-title span { color: var(--ocre-claro); }
+.hero-subtitle {
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  color: rgba(245,237,214,0.72);
+  line-height: 1.75;
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+}
+.hero-cta {
+  display: inline-block;
+  background: var(--ocre);
+  color: var(--branco);
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+.hero-cta:hover { background: var(--ocre-claro); }
+.hero-image-area {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 4/3;
+  min-height: 200px;
+}
+
+/* ===== PLACEHOLDERS ===== */
+.img-placeholder {
+  width: 100%; height: 100%;
+  background: rgba(245,237,214,0.06);
+  border: 2px dashed rgba(245,237,214,0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: rgba(245,237,214,0.45);
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 1.5rem;
+  position: relative;
+}
+.img-placeholder .img-icon { font-size: 2.2rem; opacity: 0.4; }
+.img-placeholder .img-label {
+  font-weight: 600; font-size: 0.82rem;
+  color: rgba(245,237,214,0.55);
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.img-placeholder .img-desc {
+  font-size: 0.72rem;
+  color: rgba(245,237,214,0.32);
+  max-width: 180px;
+}
+.img-placeholder-badge {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--ocre);
+  color: white;
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 7px;
+}
+
+.img-placeholder-light {
+  width: 100%; min-height: 200px;
+  background: var(--areia-escura);
+  border: 2px dashed rgba(44,95,74,0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-align: center;
+  padding: 1.5rem;
+  position: relative;
+}
+.img-placeholder-light .img-icon { font-size: 2rem; opacity: 0.3; }
+.img-placeholder-light .img-label {
+  font-weight: 600; font-size: 0.82rem;
+  color: rgba(61,28,2,0.55);
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.img-placeholder-light .img-desc {
+  font-size: 0.72rem;
+  color: rgba(61,28,2,0.35);
+  max-width: 180px;
+}
+.img-placeholder-light .img-placeholder-badge {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--verde-medio);
+  color: white;
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 7px;
+}
+
+/* ===== INTEGRANTES BAR ===== */
+.integrantes-bar {
+  background: var(--areia-escura);
+  border-top: 3px solid var(--ocre);
+  padding: 1rem 2rem;
+}
+.integrantes-bar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  align-items: center;
+}
+.integrantes-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--verde-medio);
+  flex-basis: 100%;
+}
+.integrante-nome {
+  font-size: 0.82rem;
+  color: var(--cafe);
+  font-weight: 500;
+  padding: 2px 8px;
+  background: rgba(27,58,45,0.08);
+  border-radius: 2px;
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 4rem 2rem; }
+section:nth-child(odd) { background: var(--branco); }
+section:nth-child(even) { background: var(--areia); }
+
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+.section-eyebrow {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ocre); margin-bottom: 0.6rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--verde);
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 3px solid var(--ocre);
+  display: inline-block;
+}
+
+/* ===== APRESENTAÇÃO ===== */
+.apresentacao-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.apresentacao-grid p {
+  font-size: 0.92rem;
+  color: var(--cinza-text);
+  line-height: 1.85;
+  margin-bottom: 0.9rem;
+}
+
+.reflexao-box {
+  background: var(--verde);
+  color: var(--areia);
+  padding: 2rem 2.2rem;
+  border-left: 4px solid var(--ocre);
+}
+.reflexao-box-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--verde);
+  margin-bottom: 0.9rem;
+  font-weight: 700;
+}
+.reflexao-box p {
+  font-size: 0.9rem;
+  line-height: 1.82;
+  color: rgba(245,237,214,0.85);
+}
+.reflexao-box p + p { margin-top: 0.9rem; }
+
+/* ===== PERMANÊNCIAS ===== */
+.perm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 0;
+}
+.perm-card {
+  background: var(--branco);
+  border: 1px solid rgba(27,58,45,0.12);
+  padding: 1.8rem 1.8rem 1.8rem 2.2rem;
+  position: relative;
+}
+.perm-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--ocre);
+}
+.perm-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--verde);
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+.perm-card p {
+  font-size: 0.88rem;
+  color: var(--cinza-text);
+  line-height: 1.75;
+  margin-bottom: 0.7rem;
+}
+.perm-card ul {
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+  color: var(--cinza-text);
+}
+.perm-card ul li { margin-bottom: 0.25rem; }
+
+.perm-nota {
+  background: var(--areia-escura);
+  padding: 1.5rem 2rem;
+  border-left: 4px solid var(--verde-medio);
+  margin-top: 2rem;
+}
+.perm-nota h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  color: var(--verde);
+  margin-bottom: 0.6rem;
+}
+.perm-nota p {
+  font-size: 0.88rem;
+  color: var(--cinza-text);
+  line-height: 1.8;
+}
+
+/* ===== GRIDS DE IMAGENS ===== */
+.img-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.img-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* ===== ATUALIDADES ===== */
+.atuais-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 2.5rem;
+}
+.atuais-intro h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: var(--verde);
+  margin-bottom: 0.8rem;
+  margin-top: 1.5rem;
+  font-weight: 700;
+}
+.atuais-intro h3:first-child { margin-top: 0; }
+.atuais-intro p {
+  font-size: 0.9rem;
+  color: var(--cinza-text);
+  line-height: 1.82;
+  margin-bottom: 0.75rem;
+}
+
+.topic-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+.topic-card {
+  background: var(--verde);
+  color: var(--areia);
+  padding: 1.5rem 1.4rem;
+}
+.topic-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+  color: var(--ocre-claro);
+}
+.topic-card ul {
+  padding-left: 1.1rem;
+  font-size: 0.82rem;
+  color: rgba(245,237,214,0.75);
+}
+.topic-card ul li { margin-bottom: 0.28rem; }
+
+/* ===== ESPAÇO CRÍTICO ===== */
+.critico-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+}
+.critico-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--verde);
+  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+}
+.critico-text h3:first-child { margin-top: 0; }
+.critico-text p {
+  font-size: 0.9rem;
+  color: var(--cinza-text);
+  line-height: 1.82;
+  margin-bottom: 0.7rem;
+}
+.critico-text ul {
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+  color: var(--cinza-text);
+}
+.critico-text ul li { margin-bottom: 0.32rem; }
+
+.destaque-box {
+  background: var(--ocre);
+  color: var(--branco);
+  padding: 1.8rem 1.8rem;
+}
+.destaque-box h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  margin-bottom: 0.9rem;
+  color: var(--branco);
+}
+.destaque-box p {
+  font-size: 0.88rem;
+  line-height: 1.78;
+}
+.destaque-box p + p { margin-top: 0.7rem; }
+
+/* ===== MULTIMÍDIA ===== */
+.midia-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: var(--verde);
+  margin: 2.2rem 0 1rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid rgba(27,58,45,0.18);
+}
+.midia-section h3:first-of-type { margin-top: 0; }
+
+.mapas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.graficos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.imagens-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+}
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.video-placeholder {
+  background: var(--verde);
+  aspect-ratio: 16/9;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  cursor: pointer;
+  border: 2px dashed rgba(245,237,214,0.18);
+  color: rgba(245,237,214,0.5);
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+}
+.video-play {
+  width: 42px; height: 42px;
+  border: 2px solid rgba(245,237,214,0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video-play svg { width: 15px; fill: rgba(245,237,214,0.5); margin-left: 3px; }
+.video-placeholder .img-placeholder-badge {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--ocre);
+  color: white;
+  font-size: 0.60rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 6px;
+}
+.video-label {
+  font-size: 0.76rem;
+  color: rgba(245,237,214,0.45);
+  max-width: 130px;
+}
+
+/* FONTES */
+.fontes-lista {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2.5rem;
+  margin-top: 1.2rem;
+}
+.fonte-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  color: var(--cinza-text);
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(27,58,45,0.1);
+}
+.fonte-dot {
+  width: 6px; height: 6px;
+  background: var(--ocre);
+  flex-shrink: 0;
+}
+
+/* ===== CONCLUSÃO ===== */
+#conclusao {
+  background: var(--verde);
+  color: var(--areia);
+  padding: 5rem 2rem;
+}
+#conclusao .section-eyebrow { color: var(--ocre-claro); }
+#conclusao .section-title { color: var(--areia); border-bottom-color: var(--ocre); }
+.conclusao-texto {
+  max-width: 760px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.88;
+  color: rgba(245,237,214,0.82);
+}
+.conclusao-texto p + p { margin-top: 1.1rem; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--cafe);
+  color: rgba(245,237,214,0.45);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+}
+
+/* ================================================================
+   BREAKPOINTS
+   ================================================================ */
+
+/* --- TABLET LARGO (≤1024px) --- */
+@media (max-width: 1024px) {
+  .hero-content { gap: 2.5rem; }
+  .critico-layout { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .topic-cards { gap: 1rem; }
+}
+
+/* --- TABLET (≤768px) --- */
+@media (max-width: 768px) {
+  /* Nav: esconder links, mostrar hamburguer */
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  nav { padding: 0 1.2rem; }
+
+  section { padding: 3rem 1.4rem; }
+
+  /* Hero: coluna única */
+  #inicio { padding: 4rem 1.4rem 3rem; min-height: auto; }
   .hero-content {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
-  .hero-text { position: relative; z-index: 2; }
-  .hero-eyebrow {
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ocre-claro);
-    margin-bottom: 1.2rem;
-  }
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 900;
-    color: var(--areia);
-    line-height: 1.15;
-    margin-bottom: 1.5rem;
-  }
-  .hero-title span { color: var(--ocre-claro); }
-  .hero-subtitle {
-    font-size: 1rem;
-    color: rgba(245,237,214,0.72);
-    line-height: 1.75;
-    max-width: 480px;
-    margin-bottom: 2.5rem;
-  }
-  .hero-cta {
-    display: inline-block;
-    background: var(--ocre);
-    color: var(--branco);
-    text-decoration: none;
-    padding: 0.75rem 2rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: background 0.2s;
-  }
-  .hero-cta:hover { background: var(--ocre-claro); }
+  .hero-image-area { aspect-ratio: 16/9; }
+  .hero-subtitle { max-width: 100%; }
 
-  /* HERO IMAGE PLACEHOLDER */
-  .hero-image-area {
-    position: relative;
-    z-index: 2;
-    height: 400px;
-  }
-  .img-placeholder {
-    width: 100%;
-    height: 100%;
-    background: rgba(245,237,214,0.06);
-    border: 2px dashed rgba(245,237,214,0.25);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    color: rgba(245,237,214,0.45);
-    font-size: 0.82rem;
-    text-align: center;
-    padding: 1.5rem;
-    position: relative;
-  }
-  .img-placeholder .img-icon {
-    font-size: 2.8rem;
-    opacity: 0.4;
-  }
-  .img-placeholder .img-label {
-    font-weight: 600;
-    font-size: 0.88rem;
-    color: rgba(245,237,214,0.55);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .img-placeholder .img-desc {
-    font-size: 0.78rem;
-    color: rgba(245,237,214,0.35);
-    max-width: 200px;
-  }
-  .img-placeholder-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: var(--ocre);
-    color: white;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-  }
+  /* Integrantes */
+  .integrantes-bar { padding: 1rem 1.4rem; }
+  .integrantes-label { flex-basis: 100%; margin-bottom: 0.3rem; }
 
-  /* Placeholder claro (para fundo branco) */
-  .img-placeholder-light {
-    width: 100%;
-    height: 100%;
-    background: var(--areia-escura);
-    border: 2px dashed rgba(44,95,74,0.25);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    color: rgba(61,28,2,0.4);
-    font-size: 0.82rem;
-    text-align: center;
-    padding: 1.5rem;
-    position: relative;
-    min-height: 220px;
-  }
-  .img-placeholder-light .img-icon { font-size: 2.5rem; opacity: 0.3; }
-  .img-placeholder-light .img-label {
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: rgba(61,28,2,0.55);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .img-placeholder-light .img-desc {
-    font-size: 0.78rem;
-    color: rgba(61,28,2,0.35);
-    max-width: 200px;
-  }
-  .img-placeholder-light .img-placeholder-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: var(--verde-medio);
-    color: white;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-  }
+  /* Apresentação */
+  .apresentacao-grid { grid-template-columns: 1fr; gap: 2rem; }
 
-  /* INTEGRANTES */
-  .integrantes-bar {
-    background: var(--areia-escura);
-    border-top: 3px solid var(--ocre);
-    padding: 1.2rem 2rem;
-  }
-  .integrantes-bar-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 2rem;
-    align-items: center;
-  }
-  .integrantes-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--verde-medio);
-  }
-  .integrante-nome {
-    font-size: 0.85rem;
-    color: var(--cafe);
-    font-weight: 500;
-    padding: 3px 10px;
-    background: rgba(27,58,45,0.08);
-    border-radius: 2px;
-  }
+  /* Permanências */
+  .perm-grid { grid-template-columns: 1fr; gap: 1.2rem; }
 
-  /* SECTIONS */
-  section {
-    padding: 5rem 2rem;
-  }
-  section:nth-child(odd) { background: var(--branco); }
-  section:nth-child(even) { background: var(--areia); }
+  /* Atualidades */
+  .atuais-intro { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .topic-cards { grid-template-columns: 1fr; }
 
-  .section-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+  /* Crítico */
+  .critico-layout { grid-template-columns: 1fr; gap: 1.5rem; }
 
-  .section-eyebrow {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ocre);
-    margin-bottom: 0.75rem;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    font-weight: 700;
-    color: var(--verde);
-    line-height: 1.2;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 3px solid var(--ocre);
-    display: inline-block;
-  }
+  /* Grids de imagem */
+  .img-grid-3 { grid-template-columns: 1fr 1fr; }
+  .mapas-grid { grid-template-columns: 1fr; }
+  .graficos-grid { grid-template-columns: 1fr; }
+  .imagens-grid { grid-template-columns: 1fr 1fr; }
+  .videos-grid { grid-template-columns: 1fr 1fr; }
 
-  /* PÁGINA INICIAL - reflexão */
-  .reflexao-box {
-    background: var(--verde);
-    color: var(--areia);
-    padding: 2.5rem 3rem;
-    position: relative;
-    border-left: 4px solid var(--ocre);
-  }
-  .reflexao-box p {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: rgba(245,237,214,0.85);
-  }
-  .reflexao-box p + p { margin-top: 1rem; }
+  /* Fontes */
+  .fontes-lista { grid-template-columns: 1fr; gap: 0; }
+}
 
-  /* PERMANÊNCIAS - layout */
-  .perm-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    margin-top: 2rem;
-  }
-  .perm-card {
-    background: var(--branco);
-    border: 1px solid rgba(27,58,45,0.12);
-    padding: 2rem;
-    position: relative;
-  }
-  .perm-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: var(--ocre);
-  }
-  .perm-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: var(--verde);
-    margin-bottom: 1rem;
-    font-weight: 700;
-  }
-  .perm-card p {
-    font-size: 0.92rem;
-    color: var(--cinza-text);
-    line-height: 1.75;
-    margin-bottom: 1rem;
-  }
-  .perm-card ul {
-    padding-left: 1.2rem;
-    font-size: 0.88rem;
-    color: var(--cinza-text);
-  }
-  .perm-card ul li { margin-bottom: 0.3rem; }
+/* --- MOBILE (≤480px) --- */
+@media (max-width: 480px) {
+  section { padding: 2.5rem 1rem; }
+  #inicio { padding: 3rem 1rem 2.5rem; }
 
-  /* Image row */
-  .img-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  .img-row-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  .img-slot { height: 200px; }
-  .img-slot-tall { height: 260px; }
-  .img-slot-wide {
-    grid-column: span 2;
-    height: 220px;
-  }
+  .nav-logo { font-size: 0.88rem; }
 
-  /* ATUALIDADES */
-  .atuais-intro {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-    margin-bottom: 3rem;
-  }
-  .atuais-intro p { font-size: 0.95rem; color: var(--cinza-text); line-height: 1.8; margin-bottom: 1rem; }
-  .topic-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-  .topic-card {
-    background: var(--verde);
-    color: var(--areia);
-    padding: 1.8rem 1.5rem;
-  }
-  .topic-card h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    margin-bottom: 0.75rem;
-    color: var(--ocre-claro);
-  }
-  .topic-card ul {
-    padding-left: 1.1rem;
-    font-size: 0.84rem;
-    color: rgba(245,237,214,0.75);
-  }
-  .topic-card ul li { margin-bottom: 0.3rem; }
+  .hero-title { font-size: clamp(1.5rem, 7vw, 2rem); }
 
-  /* ESPAÇO CRÍTICO */
-  .critico-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
-  }
-  .critico-text h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--verde);
-    margin-bottom: 1rem;
-    margin-top: 2rem;
-  }
-  .critico-text h3:first-child { margin-top: 0; }
-  .critico-text p { font-size: 0.95rem; color: var(--cinza-text); line-height: 1.8; margin-bottom: 0.75rem; }
-  .critico-text ul { padding-left: 1.2rem; font-size: 0.9rem; color: var(--cinza-text); }
-  .critico-text ul li { margin-bottom: 0.35rem; }
+  .integrantes-bar { padding: 0.9rem 1rem; }
+  .integrante-nome { font-size: 0.78rem; }
 
-  .destaque-box {
-    background: var(--ocre);
-    color: var(--branco);
-    padding: 2rem;
-    margin-top: 0;
-  }
-  .destaque-box h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    color: var(--branco);
-  }
-  .destaque-box p { font-size: 0.88rem; line-height: 1.75; }
+  .section-title { font-size: clamp(1.2rem, 6vw, 1.6rem); }
 
-  /* MULTIMÍDIA */
-  .midia-section h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: var(--verde);
-    margin: 2.5rem 0 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(27,58,45,0.2);
-  }
-  .midia-section h3:first-child { margin-top: 0; }
-  .mapas-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-  }
-  .mapa-slot { height: 220px; }
-  .graficos-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-  }
-  .grafico-slot { height: 200px; }
-  .imagens-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-  .img-galeria-slot { height: 180px; }
+  .img-grid-3 { grid-template-columns: 1fr; }
+  .img-grid-2 { grid-template-columns: 1fr; }
+  .imagens-grid { grid-template-columns: 1fr; }
+  .videos-grid { grid-template-columns: 1fr; }
 
-  /* VIDEOS */
-  .videos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-  .video-placeholder {
-    background: var(--verde);
-    height: 160px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    cursor: pointer;
-    border: 2px dashed rgba(245,237,214,0.2);
-    color: rgba(245,237,214,0.5);
-    text-align: center;
-    padding: 1rem;
-    position: relative;
-  }
-  .video-play {
-    width: 44px;
-    height: 44px;
-    border: 2px solid rgba(245,237,214,0.4);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .video-play svg { width: 16px; fill: rgba(245,237,214,0.5); margin-left: 3px; }
-  .video-placeholder .img-placeholder-badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: var(--ocre);
-    color: white;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 2px 7px;
-  }
-  .video-label { font-size: 0.78rem; color: rgba(245,237,214,0.45); max-width: 140px; }
+  .perm-card { padding: 1.3rem 1.3rem 1.3rem 1.7rem; }
+  .perm-card h3 { font-size: 1rem; }
 
-  /* FONTES */
-  .fontes-lista {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem 3rem;
-    margin-top: 1.5rem;
-  }
-  .fonte-item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.88rem;
-    color: var(--cinza-text);
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(27,58,45,0.1);
-  }
-  .fonte-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--ocre);
-    flex-shrink: 0;
-  }
+  .reflexao-box { padding: 1.4rem 1.4rem; }
 
-  /* CONCLUSÃO */
-  #conclusao {
-    background: var(--verde);
-    color: var(--areia);
-    padding: 5rem 2rem;
-  }
-  #conclusao .section-eyebrow { color: var(--ocre-claro); }
-  #conclusao .section-title { color: var(--areia); border-bottom-color: var(--ocre); }
-  .conclusao-texto {
-    max-width: 760px;
-    font-size: 1rem;
-    line-height: 1.85;
-    color: rgba(245,237,214,0.82);
-  }
-  .conclusao-texto p + p { margin-top: 1.2rem; }
+  .topic-card { padding: 1.2rem; }
 
-  /* FOOTER */
-  footer {
-    background: var(--cafe);
-    color: rgba(245,237,214,0.45);
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-  }
+  .destaque-box { padding: 1.4rem; }
 
-  /* ============ RESPONSIVE ============ */
-  @media (max-width: 800px) {
-    .hero-content { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-image-area { height: 260px; }
-    .perm-grid { grid-template-columns: 1fr; }
-    .atuais-intro { grid-template-columns: 1fr; }
-    .topic-cards { grid-template-columns: 1fr; }
-    .critico-layout { grid-template-columns: 1fr; }
-    .img-row { grid-template-columns: 1fr 1fr; }
-    .img-row-2 { grid-template-columns: 1fr; }
-    .mapas-grid { grid-template-columns: 1fr; }
-    .graficos-grid { grid-template-columns: 1fr; }
-    .imagens-grid { grid-template-columns: 1fr 1fr; }
-    .videos-grid { grid-template-columns: 1fr; }
-    .fontes-lista { grid-template-columns: 1fr; }
-    nav { padding: 0 1rem; }
-    .nav-links a { padding: 0 0.5rem; font-size: 0.72rem; }
-    .nav-logo { font-size: 0.85rem; }
-    .img-slot-wide { grid-column: span 1; }
-  }
+  .critico-text h3 { font-size: 1.05rem; }
+
+  .midia-section h3 { font-size: 1rem; }
+
+  .conclusao-texto { font-size: 0.9rem; }
+
+  footer { font-size: 0.7rem; padding: 1.2rem; }
+}
+
+/* --- MOBILE PEQUENO (≤360px) --- */
+@media (max-width: 360px) {
+  section { padding: 2rem 0.9rem; }
+  #inicio { padding: 2.5rem 0.9rem 2rem; }
+  .hero-title { font-size: 1.4rem; }
+  .perm-grid { gap: 1rem; }
+}
 </style>
 </head>
 <body>
@@ -606,9 +767,22 @@
     <li><a href="#multimidia">Multimídia</a></li>
     <li><a href="#conclusao">Conclusão</a></li>
   </ul>
+  <button class="nav-toggle" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- HERO / PÁGINA INICIAL -->
+<!-- DRAWER MOBILE -->
+<nav class="nav-drawer" id="navDrawer">
+  <a href="#inicio" onclick="closeMenu()">Início</a>
+  <a href="#permanencias" onclick="closeMenu()">Permanências e Mudanças</a>
+  <a href="#atualidades" onclick="closeMenu()">Conexão com Atualidades</a>
+  <a href="#critico" onclick="closeMenu()">Espaço Crítico</a>
+  <a href="#multimidia" onclick="closeMenu()">Multimídia e Fontes</a>
+  <a href="#conclusao" onclick="closeMenu()">Conclusão</a>
+</nav>
+
+<!-- HERO -->
 <section id="inicio">
   <div class="hero-bg-pattern"></div>
   <div class="hero-accent-line"></div>
@@ -624,13 +798,12 @@
       </p>
       <a href="#permanencias" class="hero-cta">Explorar o projeto</a>
     </div>
-
     <div class="hero-image-area">
       <div class="img-placeholder">
         <div class="img-placeholder-badge">Imagem</div>
         <span class="img-icon">🌍</span>
         <span class="img-label">Imagem de destaque</span>
-        <span class="img-desc">Sugestão: mapa dos continentes africano e americano, campo agrícola, ou plantação</span>
+        <span class="img-desc">Sugestão: mapa dos continentes africano e americano, campo agrícola ou plantação</span>
       </div>
     </div>
   </div>
@@ -649,26 +822,19 @@
   </div>
 </div>
 
-<!-- APRESENTAÇÃO E REFLEXÃO -->
-<section style="padding: 4rem 2rem; background: var(--areia);">
+<!-- APRESENTAÇÃO -->
+<section style="background: var(--areia);">
   <div class="section-inner">
     <p class="section-eyebrow">Página Inicial</p>
     <h2 class="section-title">Apresentação</h2>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+    <div class="apresentacao-grid">
       <div>
-        <p style="font-size: 0.95rem; color: var(--cinza-text); line-height: 1.85; margin-bottom: 1rem;">
-          A produção de alimentos é uma das atividades mais importantes para a sociedade, pois garante a sobrevivência da população e contribui para o desenvolvimento econômico dos países. Entretanto, apesar do aumento da produção agrícola mundial nas últimas décadas, a fome e a insegurança alimentar ainda afetam milhões de pessoas em diferentes regiões do planeta.
-        </p>
-        <p style="font-size: 0.95rem; color: var(--cinza-text); line-height: 1.85; margin-bottom: 1rem;">
-          A África possui um enorme potencial agrícola devido à disponibilidade de terras férteis, diversidade climática e abundância de recursos naturais. Porém, grande parte de sua população ainda enfrenta dificuldades para ter acesso regular a alimentos.
-        </p>
-        <p style="font-size: 0.95rem; color: var(--cinza-text); line-height: 1.85;">
-          Enquanto isso, países como Brasil e Argentina consolidaram-se como grandes potências agrícolas e importantes exportadores mundiais de commodities. Este trabalho busca analisar as relações entre segurança alimentar, agronegócio e desenvolvimento econômico, comparando a realidade africana com o modelo agrícola exportador dessas nações.
-        </p>
+        <p>A produção de alimentos é uma das atividades mais importantes para a sociedade, pois garante a sobrevivência da população e contribui para o desenvolvimento econômico dos países. Entretanto, apesar do aumento da produção agrícola mundial nas últimas décadas, a fome e a insegurança alimentar ainda afetam milhões de pessoas em diferentes regiões do planeta.</p>
+        <p>A África possui um enorme potencial agrícola devido à disponibilidade de terras férteis, diversidade climática e abundância de recursos naturais. Porém, grande parte de sua população ainda enfrenta dificuldades para ter acesso regular a alimentos.</p>
+        <p>Enquanto isso, países como Brasil e Argentina consolidaram-se como grandes potências agrícolas e importantes exportadores mundiais de commodities. Este trabalho busca analisar as relações entre segurança alimentar, agronegócio e desenvolvimento econômico, comparando a realidade africana com o modelo agrícola exportador dessas nações.</p>
       </div>
       <div>
-        <h3 style="font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--verde); margin-bottom:1rem; font-weight:700;">Reflexão sobre o Saber Coletivo</h3>
+        <h3 class="reflexao-box-title">Reflexão sobre o Saber Coletivo</h3>
         <div class="reflexao-box">
           <p>A realização deste trabalho demonstrou a importância da colaboração na construção do conhecimento. Cada integrante contribuiu com pesquisas, ideias e análises, permitindo que o grupo desenvolvesse uma compreensão mais ampla sobre a segurança alimentar, o agronegócio e as relações entre África, Brasil e Argentina.</p>
           <p>O saber coletivo é construído quando diferentes pessoas compartilham conhecimentos, opiniões e experiências para alcançar um objetivo comum. Este projeto representa não apenas a soma das contribuições individuais, mas o resultado da cooperação, do diálogo e da responsabilidade compartilhada entre todos os integrantes.</p>
@@ -683,9 +849,7 @@
   <div class="section-inner">
     <p class="section-eyebrow">Seção 2</p>
     <h2 class="section-title">Permanências e Mudanças</h2>
-
     <div class="perm-grid">
-      <!-- Card África -->
       <div class="perm-card">
         <h3>🌍 O Potencial Agrícola Africano</h3>
         <p>A África é considerada uma das regiões com maior potencial agrícola do planeta. Estima-se que o continente possua cerca de <strong>60% das terras agricultáveis ainda não exploradas do mundo</strong>, além de grande diversidade climática.</p>
@@ -695,17 +859,13 @@
           <li>Algodão e Amendoim</li>
           <li>Milho, Arroz e Mandioca</li>
         </ul>
-        <p style="margin-top:0.8rem;">Apesar dessas vantagens, muitos países africanos enfrentam dificuldades devido à falta de infraestrutura, conflitos internos e escassez de investimentos.</p>
+        <p style="margin-top:0.7rem;">Apesar dessas vantagens, muitos países enfrentam dificuldades por falta de infraestrutura, conflitos internos e escassez de investimentos.</p>
       </div>
-
-      <!-- Card Colonialismo -->
       <div class="perm-card">
         <h3>📜 A Influência do Colonialismo</h3>
         <p>Durante os séculos XIX e XX, diversos territórios africanos foram colonizados por potências europeias. A economia local foi organizada para atender aos interesses externos, priorizando a exportação de matérias-primas.</p>
-        <p>Como consequência, muitas regiões deixaram de investir em sistemas produtivos voltados para o abastecimento interno. Após as independências, diversos países herdaram economias dependentes e com pouca industrialização, situação que ainda influencia seu desenvolvimento.</p>
+        <p>Como consequência, muitas regiões deixaram de investir em sistemas produtivos voltados para o abastecimento interno. Após as independências, diversos países herdaram economias dependentes e com pouca industrialização.</p>
       </div>
-
-      <!-- Card Brasil -->
       <div class="perm-card">
         <h3>🇧🇷 O Modelo Exportador Brasileiro</h3>
         <p>O Brasil possui uma das agriculturas mais desenvolvidas do mundo, impulsionado por investimentos em pesquisa científica, mecanização agrícola e biotecnologia.</p>
@@ -715,13 +875,11 @@
           <li>Café e Cana-de-açúcar</li>
           <li>Carne bovina e Frango</li>
         </ul>
-        <p style="margin-top:0.8rem;">O agronegócio representa parcela significativa das exportações brasileiras e desempenha papel fundamental na economia nacional.</p>
+        <p style="margin-top:0.7rem;">O agronegócio representa parcela significativa das exportações brasileiras e desempenha papel fundamental na economia nacional.</p>
       </div>
-
-      <!-- Card Argentina -->
       <div class="perm-card">
         <h3>🇦🇷 O Modelo Exportador Argentino</h3>
-        <p>A Argentina possui forte tradição agrícola e pecuária. Seu território apresenta extensas áreas férteis, especialmente na região dos Pampas. Assim como o Brasil, utiliza tecnologia avançada e possui grande participação no mercado internacional.</p>
+        <p>A Argentina possui forte tradição agrícola e pecuária, com extensas áreas férteis especialmente na região dos Pampas. Assim como o Brasil, utiliza tecnologia avançada e possui grande participação no mercado internacional.</p>
         <p>Principais produtos exportados:</p>
         <ul>
           <li>Soja e Trigo</li>
@@ -731,64 +889,52 @@
       </div>
     </div>
 
-    <!-- Imagens da seção Permanências -->
-    <div class="img-row" style="margin-top:2.5rem;">
-      <div class="img-slot">
-        <div class="img-placeholder-light">
-          <div class="img-placeholder-badge">Imagem 1</div>
-          <span class="img-icon">🌱</span>
-          <span class="img-label">Agricultura africana</span>
-          <span class="img-desc">Sugestão: agricultura familiar africana ou campo cultivado</span>
-        </div>
+    <div class="img-grid-3">
+      <div class="img-placeholder-light">
+        <div class="img-placeholder-badge">Imagem 1</div>
+        <span class="img-icon">🌱</span>
+        <span class="img-label">Agricultura africana</span>
+        <span class="img-desc">Sugestão: agricultura familiar africana ou campo cultivado</span>
       </div>
-      <div class="img-slot">
-        <div class="img-placeholder-light">
-          <div class="img-placeholder-badge">Imagem 2</div>
-          <span class="img-icon">🌾</span>
-          <span class="img-label">Plantações de soja no Brasil</span>
-          <span class="img-desc">Sugestão: lavoura de soja no cerrado brasileiro</span>
-        </div>
+      <div class="img-placeholder-light">
+        <div class="img-placeholder-badge">Imagem 2</div>
+        <span class="img-icon">🌾</span>
+        <span class="img-label">Plantações de soja no Brasil</span>
+        <span class="img-desc">Sugestão: lavoura de soja no cerrado brasileiro</span>
       </div>
-      <div class="img-slot">
-        <div class="img-placeholder-light">
-          <div class="img-placeholder-badge">Imagem 3</div>
-          <span class="img-icon">🐄</span>
-          <span class="img-label">Pecuária nos Pampas</span>
-          <span class="img-desc">Sugestão: rebanho bovino na Pampa argentina</span>
-        </div>
+      <div class="img-placeholder-light">
+        <div class="img-placeholder-badge">Imagem 3</div>
+        <span class="img-icon">🐄</span>
+        <span class="img-label">Pecuária nos Pampas</span>
+        <span class="img-desc">Sugestão: rebanho bovino na Pampa argentina</span>
       </div>
     </div>
 
-    <div style="margin-top:2.5rem; background:var(--areia-escura); padding:2rem; border-left:4px solid var(--verde-medio);">
-      <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--verde); margin-bottom:0.75rem;">Permanências e Transformações</h3>
-      <p style="font-size:0.92rem; color:var(--cinza-text); line-height:1.8;">Ao longo do tempo, tanto a África quanto os países sul-americanos passaram por importantes mudanças econômicas e tecnológicas. Entretanto, continuam existindo desafios relacionados à desigualdade social, concentração fundiária, dependência de commodities e impactos ambientais provocados pela expansão agrícola.</p>
+    <div class="perm-nota">
+      <h3>Permanências e Transformações</h3>
+      <p>Ao longo do tempo, tanto a África quanto os países sul-americanos passaram por importantes mudanças econômicas e tecnológicas. Entretanto, continuam existindo desafios relacionados à desigualdade social, concentração fundiária, dependência de commodities e impactos ambientais provocados pela expansão agrícola.</p>
     </div>
   </div>
 </section>
 
 <!-- ATUALIDADES -->
-<section id="atualidades" style="background:var(--areia);">
+<section id="atualidades" style="background: var(--areia);">
   <div class="section-inner">
     <p class="section-eyebrow">Seção 3</p>
     <h2 class="section-title">Conexão com as Atualidades</h2>
 
     <div class="atuais-intro">
       <div>
-        <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--verde); margin-bottom:1rem;">O Que é Segurança Alimentar?</h3>
-        <p>Segurança alimentar é a condição em que todas as pessoas possuem acesso regular e permanente a alimentos suficientes, seguros e nutritivos para manter uma vida saudável e ativa.</p>
-        <p>Esse conceito não está relacionado apenas à produção de alimentos, mas também à capacidade das pessoas de adquiri-los e consumi-los adequadamente.</p>
-
-        <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--verde); margin-top:1.5rem; margin-bottom:1rem;">A Fome no Século XXI</h3>
-        <p>Apesar dos avanços tecnológicos e do aumento da produtividade agrícola mundial, milhões de pessoas ainda convivem com a fome. As principais causas desse problema incluem pobreza, conflitos armados, desigualdade social, crises econômicas e mudanças climáticas. Em diversas regiões africanas, esses fatores atuam simultaneamente.</p>
+        <h3>O Que é Segurança Alimentar?</h3>
+        <p>Segurança alimentar é a condição em que todas as pessoas possuem acesso regular e permanente a alimentos suficientes, seguros e nutritivos para manter uma vida saudável e ativa. Esse conceito não está relacionado apenas à produção de alimentos, mas também à capacidade das pessoas de adquiri-los e consumi-los adequadamente.</p>
+        <h3>A Fome no Século XXI</h3>
+        <p>Apesar dos avanços tecnológicos e do aumento da produtividade agrícola mundial, milhões de pessoas ainda convivem com a fome. As principais causas incluem pobreza, conflitos armados, desigualdade social, crises econômicas e mudanças climáticas. Em diversas regiões africanas, esses fatores atuam simultaneamente.</p>
       </div>
-
-      <div class="img-slot-tall" style="height:320px;">
-        <div class="img-placeholder-light" style="min-height:320px; height:100%;">
-          <div class="img-placeholder-badge">Imagem 4</div>
-          <span class="img-icon">💧</span>
-          <span class="img-label">Sistemas de irrigação africanos</span>
-          <span class="img-desc">Sugestão: sistema de irrigação ou área seca/árida na África</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height: 280px;">
+        <div class="img-placeholder-badge">Imagem 4</div>
+        <span class="img-icon">💧</span>
+        <span class="img-label">Sistemas de irrigação africanos</span>
+        <span class="img-desc">Sugestão: sistema de irrigação ou área seca/árida na África</span>
       </div>
     </div>
 
@@ -825,23 +971,18 @@
       </div>
     </div>
 
-    <!-- Imagens atualidades -->
-    <div class="img-row-2" style="margin-top:2rem;">
-      <div class="img-slot-tall" style="height:200px;">
-        <div class="img-placeholder-light" style="min-height:200px; height:100%;">
-          <div class="img-placeholder-badge">Imagem 5</div>
-          <span class="img-icon">🛰️</span>
-          <span class="img-label">Tecnologia agrícola moderna</span>
-          <span class="img-desc">Sugestão: drone agrícola, satélite ou agricultura de precisão</span>
-        </div>
+    <div class="img-grid-2">
+      <div class="img-placeholder-light">
+        <div class="img-placeholder-badge">Imagem 5</div>
+        <span class="img-icon">🛰️</span>
+        <span class="img-label">Tecnologia agrícola moderna</span>
+        <span class="img-desc">Sugestão: drone agrícola, satélite ou agricultura de precisão</span>
       </div>
-      <div class="img-slot-tall" style="height:200px;">
-        <div class="img-placeholder-light" style="min-height:200px; height:100%;">
-          <div class="img-placeholder-badge">Imagem 6</div>
-          <span class="img-icon">☀️</span>
-          <span class="img-label">Impacto das mudanças climáticas</span>
-          <span class="img-desc">Sugestão: seca, desertificação ou enchente em área agrícola</span>
-        </div>
+      <div class="img-placeholder-light">
+        <div class="img-placeholder-badge">Imagem 6</div>
+        <span class="img-icon">☀️</span>
+        <span class="img-label">Impacto das mudanças climáticas</span>
+        <span class="img-desc">Sugestão: seca, desertificação ou enchente em área agrícola</span>
       </div>
     </div>
   </div>
@@ -856,191 +997,149 @@
     <div class="critico-layout">
       <div class="critico-text">
         <h3>Produção de Alimentos e Desigualdade</h3>
-        <p>Um dos maiores paradoxos da atualidade é o fato de o mundo produzir alimentos suficientes para toda a população e, ainda assim, milhões de pessoas passarem fome. Isso demonstra que o problema da fome não está apenas na quantidade produzida, mas também na forma como os recursos são distribuídos.</p>
+        <p>Um dos maiores paradoxos da atualidade é o fato de o mundo produzir alimentos suficientes para toda a população e, ainda assim, milhões de pessoas passarem fome. Isso demonstra que o problema não está apenas na quantidade produzida, mas na forma como os recursos são distribuídos.</p>
         <p>Questões como pobreza, desigualdade econômica e acesso limitado aos serviços básicos contribuem para a manutenção desse cenário.</p>
-
         <h3>A África Pode se Tornar uma Potência Agrícola?</h3>
-        <p>A África reúne condições naturais favoráveis para ampliar sua produção agrícola e se tornar uma das maiores potências do setor. Entre seus pontos positivos destacam-se:</p>
+        <p>A África reúne condições naturais favoráveis para ampliar sua produção agrícola. Entre seus pontos positivos:</p>
         <ul>
           <li>Grande disponibilidade de terras férteis</li>
           <li>População jovem em crescimento</li>
           <li>Diversidade climática privilegiada</li>
           <li>Mercado consumidor em expansão</li>
         </ul>
-        <p style="margin-top:0.75rem;">Entretanto, para alcançar esse potencial, será necessário enfrentar desafios relacionados à infraestrutura, educação, tecnologia, estabilidade política e investimentos.</p>
-
+        <p style="margin-top:0.7rem;">Para alcançar esse potencial, será necessário enfrentar desafios relacionados à infraestrutura, educação, tecnologia, estabilidade política e investimentos.</p>
         <h3>Desenvolvimento Sustentável</h3>
-        <p>O crescimento da produção agrícola deve ocorrer de forma sustentável, garantindo a preservação dos recursos naturais para as futuras gerações. Isso significa produzir alimentos sem comprometer o meio ambiente, conciliando crescimento econômico, inclusão social e conservação ambiental.</p>
+        <p>O crescimento da produção agrícola deve ocorrer de forma sustentável, garantindo a preservação dos recursos naturais para as futuras gerações, conciliando crescimento econômico, inclusão social e conservação ambiental.</p>
       </div>
 
       <div>
         <div class="destaque-box">
           <h4>Reflexão do Grupo</h4>
           <p>Acreditamos que a segurança alimentar é um dos maiores desafios do século XXI. Não basta apenas aumentar a produção agrícola; é necessário garantir que todas as pessoas tenham acesso aos alimentos produzidos.</p>
-          <p style="margin-top:0.75rem;">Além disso, a cooperação internacional, os investimentos em tecnologia e a implementação de políticas públicas eficientes são fundamentais para combater a fome e promover o desenvolvimento sustentável em diferentes regiões do mundo.</p>
+          <p>A cooperação internacional, os investimentos em tecnologia e a implementação de políticas públicas eficientes são fundamentais para combater a fome e promover o desenvolvimento sustentável.</p>
         </div>
-
-        <div class="img-slot-tall" style="height:240px; margin-top:1.5rem;">
-          <div class="img-placeholder-light" style="min-height:240px; height:100%;">
-            <div class="img-placeholder-badge">Imagem 7</div>
-            <span class="img-icon">🤝</span>
-            <span class="img-label">Cooperação e desenvolvimento</span>
-            <span class="img-desc">Sugestão: cooperação agrícola, mercado local africano ou distribuição de alimentos</span>
-          </div>
+        <div class="img-placeholder-light" style="min-height: 240px; margin-top: 1.2rem;">
+          <div class="img-placeholder-badge">Imagem 7</div>
+          <span class="img-icon">🤝</span>
+          <span class="img-label">Cooperação e desenvolvimento</span>
+          <span class="img-desc">Sugestão: cooperação agrícola, mercado local africano ou distribuição de alimentos</span>
         </div>
       </div>
     </div>
 
-    <!-- Produção de cacau -->
-    <div class="img-row-2" style="margin-top:2rem;">
-      <div class="img-slot-tall" style="height:200px;">
-        <div class="img-placeholder-light" style="min-height:200px; height:100%;">
-          <div class="img-placeholder-badge">Imagem 8</div>
-          <span class="img-icon">🍫</span>
-          <span class="img-label">Produção de cacau na África Ocidental</span>
-          <span class="img-desc">Sugestão: colheita de cacau, Costa do Marfim ou Gana</span>
-        </div>
+    <div class="img-grid-2">
+      <div class="img-placeholder-light">
+        <div class="img-placeholder-badge">Imagem 8</div>
+        <span class="img-icon">🍫</span>
+        <span class="img-label">Produção de cacau na África Ocidental</span>
+        <span class="img-desc">Sugestão: colheita de cacau, Costa do Marfim ou Gana</span>
       </div>
-      <div class="img-slot-tall" style="height:200px;">
-        <div class="img-placeholder-light" style="min-height:200px; height:100%;">
-          <div class="img-placeholder-badge">Imagem 9</div>
-          <span class="img-icon">♻️</span>
-          <span class="img-label">Agricultura sustentável</span>
-          <span class="img-desc">Sugestão: agroflorestas, cultivo orgânico ou práticas sustentáveis</span>
-        </div>
+      <div class="img-placeholder-light">
+        <div class="img-placeholder-badge">Imagem 9</div>
+        <span class="img-icon">♻️</span>
+        <span class="img-label">Agricultura sustentável</span>
+        <span class="img-desc">Sugestão: agroflorestas, cultivo orgânico ou práticas sustentáveis</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- MULTIMÍDIA E FONTES -->
-<section id="multimidia" style="background:var(--areia);">
+<section id="multimidia" style="background: var(--areia);">
   <div class="section-inner midia-section">
     <p class="section-eyebrow">Seção 5</p>
     <h2 class="section-title">Multimídia e Fontes</h2>
 
-    <!-- MAPAS -->
     <h3>🗺️ Mapas Temáticos</h3>
     <div class="mapas-grid">
-      <div class="mapa-slot">
-        <div class="img-placeholder-light" style="min-height:220px; height:100%;">
-          <div class="img-placeholder-badge">Mapa 1</div>
-          <span class="img-icon">🗺️</span>
-          <span class="img-label">Terras agricultáveis da África</span>
-          <span class="img-desc">Inserir mapa temático com áreas férteis do continente africano</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:220px;">
+        <div class="img-placeholder-badge">Mapa 1</div>
+        <span class="img-icon">🗺️</span>
+        <span class="img-label">Terras agricultáveis da África</span>
+        <span class="img-desc">Inserir mapa temático com áreas férteis do continente africano</span>
       </div>
-      <div class="mapa-slot">
-        <div class="img-placeholder-light" style="min-height:220px; height:100%;">
-          <div class="img-placeholder-badge">Mapa 2</div>
-          <span class="img-icon">🗺️</span>
-          <span class="img-label">Produção agrícola brasileira</span>
-          <span class="img-desc">Inserir mapa com as principais regiões produtoras do Brasil</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:220px;">
+        <div class="img-placeholder-badge">Mapa 2</div>
+        <span class="img-icon">🗺️</span>
+        <span class="img-label">Produção agrícola brasileira</span>
+        <span class="img-desc">Inserir mapa com as principais regiões produtoras do Brasil</span>
       </div>
-      <div class="mapa-slot">
-        <div class="img-placeholder-light" style="min-height:220px; height:100%;">
-          <div class="img-placeholder-badge">Mapa 3</div>
-          <span class="img-icon">🗺️</span>
-          <span class="img-label">Produção agrícola argentina</span>
-          <span class="img-desc">Inserir mapa destacando a região dos Pampas e principais culturas</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:220px;">
+        <div class="img-placeholder-badge">Mapa 3</div>
+        <span class="img-icon">🗺️</span>
+        <span class="img-label">Produção agrícola argentina</span>
+        <span class="img-desc">Inserir mapa destacando a região dos Pampas e principais culturas</span>
       </div>
-      <div class="mapa-slot">
-        <div class="img-placeholder-light" style="min-height:220px; height:100%;">
-          <div class="img-placeholder-badge">Mapa 4</div>
-          <span class="img-icon">🗺️</span>
-          <span class="img-label">Insegurança alimentar mundial</span>
-          <span class="img-desc">Inserir mapa mundial com índices de insegurança alimentar por país</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:220px;">
+        <div class="img-placeholder-badge">Mapa 4</div>
+        <span class="img-icon">🗺️</span>
+        <span class="img-label">Insegurança alimentar mundial</span>
+        <span class="img-desc">Inserir mapa mundial com índices de insegurança alimentar por país</span>
       </div>
     </div>
 
-    <!-- GRÁFICOS -->
     <h3>📊 Gráficos Comparativos</h3>
     <div class="graficos-grid">
-      <div class="grafico-slot">
-        <div class="img-placeholder-light" style="min-height:200px; height:100%;">
-          <div class="img-placeholder-badge">Gráfico 1</div>
-          <span class="img-icon">📊</span>
-          <span class="img-label">Exportações agrícolas: Brasil × Argentina × África</span>
-          <span class="img-desc">Inserir gráfico de barras comparativo</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:200px;">
+        <div class="img-placeholder-badge">Gráfico 1</div>
+        <span class="img-icon">📊</span>
+        <span class="img-label">Exportações agrícolas: Brasil × Argentina × África</span>
+        <span class="img-desc">Inserir gráfico de barras comparativo</span>
       </div>
-      <div class="grafico-slot">
-        <div class="img-placeholder-light" style="min-height:200px; height:100%;">
-          <div class="img-placeholder-badge">Gráfico 2</div>
-          <span class="img-icon">📊</span>
-          <span class="img-label">Produção mundial de soja</span>
-          <span class="img-desc">Inserir gráfico de pizza ou barras com principais produtores</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:200px;">
+        <div class="img-placeholder-badge">Gráfico 2</div>
+        <span class="img-icon">📊</span>
+        <span class="img-label">Produção mundial de soja</span>
+        <span class="img-desc">Inserir gráfico de pizza ou barras com principais produtores</span>
       </div>
-      <div class="grafico-slot">
-        <div class="img-placeholder-light" style="min-height:200px; height:100%;">
-          <div class="img-placeholder-badge">Gráfico 3</div>
-          <span class="img-icon">📊</span>
-          <span class="img-label">População em insegurança alimentar</span>
-          <span class="img-desc">Inserir gráfico com dados por continente ou região</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:200px;">
+        <div class="img-placeholder-badge">Gráfico 3</div>
+        <span class="img-icon">📊</span>
+        <span class="img-label">População em insegurança alimentar</span>
+        <span class="img-desc">Inserir gráfico com dados por continente ou região</span>
       </div>
-      <div class="grafico-slot">
-        <div class="img-placeholder-light" style="min-height:200px; height:100%;">
-          <div class="img-placeholder-badge">Gráfico 4</div>
-          <span class="img-icon">📊</span>
-          <span class="img-label">Terras agricultáveis por continente</span>
-          <span class="img-desc">Inserir gráfico de barras com disponibilidade de terras</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:200px;">
+        <div class="img-placeholder-badge">Gráfico 4</div>
+        <span class="img-icon">📊</span>
+        <span class="img-label">Terras agricultáveis por continente</span>
+        <span class="img-desc">Inserir gráfico de barras com disponibilidade de terras</span>
       </div>
     </div>
 
-    <!-- GALERIA DE IMAGENS -->
     <h3>🖼️ Galeria de Imagens</h3>
     <div class="imagens-grid">
-      <div class="img-galeria-slot">
-        <div class="img-placeholder-light" style="min-height:180px; height:100%;">
-          <div class="img-placeholder-badge">Foto 1</div>
-          <span class="img-icon">🌾</span>
-          <span class="img-label">Plantações de soja no Brasil</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:170px;">
+        <div class="img-placeholder-badge">Foto 1</div>
+        <span class="img-icon">🌾</span>
+        <span class="img-label">Plantações de soja no Brasil</span>
       </div>
-      <div class="img-galeria-slot">
-        <div class="img-placeholder-light" style="min-height:180px; height:100%;">
-          <div class="img-placeholder-badge">Foto 2</div>
-          <span class="img-icon">🍫</span>
-          <span class="img-label">Produção de cacau — África Ocidental</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:170px;">
+        <div class="img-placeholder-badge">Foto 2</div>
+        <span class="img-icon">🍫</span>
+        <span class="img-label">Produção de cacau — África Ocidental</span>
       </div>
-      <div class="img-galeria-slot">
-        <div class="img-placeholder-light" style="min-height:180px; height:100%;">
-          <div class="img-placeholder-badge">Foto 3</div>
-          <span class="img-icon">🐄</span>
-          <span class="img-label">Pecuária nos Pampas argentinos</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:170px;">
+        <div class="img-placeholder-badge">Foto 3</div>
+        <span class="img-icon">🐄</span>
+        <span class="img-label">Pecuária nos Pampas argentinos</span>
       </div>
-      <div class="img-galeria-slot">
-        <div class="img-placeholder-light" style="min-height:180px; height:100%;">
-          <div class="img-placeholder-badge">Foto 4</div>
-          <span class="img-icon">💧</span>
-          <span class="img-label">Sistemas de irrigação africanos</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:170px;">
+        <div class="img-placeholder-badge">Foto 4</div>
+        <span class="img-icon">💧</span>
+        <span class="img-label">Sistemas de irrigação africanos</span>
       </div>
-      <div class="img-galeria-slot">
-        <div class="img-placeholder-light" style="min-height:180px; height:100%;">
-          <div class="img-placeholder-badge">Foto 5</div>
-          <span class="img-icon">👩‍🌾</span>
-          <span class="img-label">Agricultura familiar africana</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:170px;">
+        <div class="img-placeholder-badge">Foto 5</div>
+        <span class="img-icon">👩‍🌾</span>
+        <span class="img-label">Agricultura familiar africana</span>
       </div>
-      <div class="img-galeria-slot">
-        <div class="img-placeholder-light" style="min-height:180px; height:100%;">
-          <div class="img-placeholder-badge">Foto 6</div>
-          <span class="img-icon">🚜</span>
-          <span class="img-label">Tecnologia agrícola moderna</span>
-        </div>
+      <div class="img-placeholder-light" style="min-height:170px;">
+        <div class="img-placeholder-badge">Foto 6</div>
+        <span class="img-icon">🚜</span>
+        <span class="img-label">Tecnologia agrícola moderna</span>
       </div>
     </div>
 
-    <!-- VÍDEOS -->
     <h3>🎬 Vídeos</h3>
     <div class="videos-grid">
       <div class="video-placeholder">
@@ -1066,7 +1165,6 @@
       </div>
     </div>
 
-    <!-- FONTES -->
     <h3>📚 Referências</h3>
     <div class="fontes-lista">
       <div class="fonte-item"><span class="fonte-dot"></span>FAO — Organização das Nações Unidas para Alimentação e Agricultura</div>
@@ -1099,6 +1197,27 @@
 <footer>
   Geodinâmica Digital – África & Américas &nbsp;·&nbsp; Trabalho Escolar &nbsp;·&nbsp; FIAP
 </footer>
+
+<script>
+  function toggleMenu() {
+    const drawer = document.getElementById('navDrawer');
+    const toggle = document.querySelector('.nav-toggle');
+    drawer.classList.toggle('open');
+    toggle.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('navDrawer').classList.remove('open');
+    document.querySelector('.nav-toggle').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    const drawer = document.getElementById('navDrawer');
+    const toggle = document.querySelector('.nav-toggle');
+    if (!drawer.contains(e.target) && !toggle.contains(e.target)) {
+      drawer.classList.remove('open');
+      toggle.classList.remove('open');
+    }
+  });
+</script>
 
 </body>
 </html>
